@@ -40,6 +40,8 @@ parser.add_argument('--lw', default=0.2, type=float,
 parser.add_argument('--print_image', default=True, type=bool,
                     help='print the images')
 
+parser.add_argument('--kernel_size', default=5, type=float,
+                    help='Kernel size for the convolution layers.')
 parser.add_argument('--l2', default=0.5, type=float,
                     help='l2_regularization scale')
 parser.add_argument('--learning_rate', default=0.0005,
@@ -50,6 +52,7 @@ def cnn_model_fn(features, labels, mode, params):
   """Model function."""
   print('---------- Mode:', mode.upper(), ' ----------')
   image_size = params['image_size']
+  kernel_size = params['kernel_size']
   learning_rate = params['learning_rate']
   l2_regularization = params.get('l2_regularization')
   if l2_regularization:
@@ -71,7 +74,7 @@ def cnn_model_fn(features, labels, mode, params):
   conv1 = tf.layers.conv2d(
       inputs=input_layer,
       filters=32,
-      kernel_size=[5, 5],
+      kernel_size=[kernel_size, kernel_size],
       padding="same",
       activation=tf.nn.relu)
 
@@ -89,7 +92,7 @@ def cnn_model_fn(features, labels, mode, params):
   conv2 = tf.layers.conv2d(
       inputs=pool1,
       filters=64,
-      kernel_size=[5, 5],
+      kernel_size=[kernel_size, kernel_size],
       padding="same",
       activation=tf.nn.relu)
 
@@ -177,6 +180,7 @@ def train_and_evaluate_model(args):
         'image_size is %d but must be divisible by 4.' % args.image_size)
 
   params = {'image_size': args.image_size,
+            'kernel_size': args.kernel_size,
             'l2_regularization': args.l2,
             'learning_rate': args.learning_rate,
             }
@@ -254,7 +258,7 @@ def make_predictions(args, estimator):
 
   print('Arguments:', args)
   with tf.Session() as sess:
-    for prediction in predict_results:
+    for test, prediction in zip(test_params, predict_results):
       test_data = sess.run(test_elem)
       predicted_data = sess.run(predicted_element)
       if args.print_image:
@@ -264,10 +268,10 @@ def make_predictions(args, estimator):
         print('Predicted:')
         print(predicted_data[0]['image'])
         print()
-      print('True input:', test_params[1])
+      print('True input:', test)
       print('Prediction:', prediction)
       print('mse labels:',
-            _mse(list(test_params[1].values()), list(prediction.values())))
+            _mse(list(test.values()), list(prediction.values())))
       print('mse image:',
             _mse(test_data[0]['image'], predicted_data[0]['image']))
       print()
