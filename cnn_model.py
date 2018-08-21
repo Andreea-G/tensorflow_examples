@@ -1,4 +1,4 @@
-"""An example of a CNN model. The data is a randomly generated and consists of
+"""An example of a CNN model. The data is randomly generated and consists of
 images of image_size * image_size pixels, in gray scale (1 channel). The
 images represent plots of some y(x) function governed by some parameters. Those
 parameters represent the labels that the CNN is supposed to predict.
