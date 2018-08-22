@@ -150,7 +150,9 @@ The `generator_class` is a custom class we created, where the `get_data_generato
 
 This part is not in the slightest needed to understanding `Tensorflow`, but I should probably explain the functions I'm using here. I figured using `sin` or `cos` was too boring, so decided to come up with something more intersting. Picture yourself playing basketball, and you're throwing the ball in the air. The ball will move according to a parabolic trajectory, then it will hit the ground and bounce back again. Unlike in the real world, here we assume zero energy loss. So in our very unrealistic scenario the ball would continue forever to create these parabolic trajectories, bouncing off the ground over and over again. The parameters that I'm randomizing are the height `y0` from which you throw the ball, and the initial velocity in the vertical direction `v0y`. The height will always be a positive number (the ground level is at `y = 0`), but `v0y` can be positive or negative (throw the ball up or down). The other variables I'm keeping constant (the max time, the horizontal velocity `v0x`, the gravitational constant etc), those just set the scale of the image. 
 
+## Licence
 
+GNU GPL version 2 or any later version
 
 
 [cnn_mnist_tutorial]: https://www.tensorflow.org/tutorials/estimators/cnn
