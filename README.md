@@ -109,7 +109,7 @@ tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
 
 ## CNN
 
-Here we're building a CNN model that receives images in batches, where each image represents a plot of some family of functions for some given parameters. A basic example of such a function could be a `sine` wave parametrized by its amplitude and period. The parameters that were used to generate the function (so the amplitude and period in this case) are real numbers, and they are the labels that the CNN has to predict. I know what you're thinking, this is probably the least efficient way of predicting the parameters describing my functions :D. But this is just a toy model meant to help understand `Tensorflow`, so don't read too much into it.
+Here we're building a CNN model that receives images in batches, where each image represents a plot of some family of functions for some given parameters. A basic example of such a function could be a `sine` wave parametrized by its amplitude and period. The parameters that were used to generate the function (so the amplitude and period in this case) are real numbers, and they are the labels that the CNN has to predict. I know what you're thinking, this is probably the least efficient way of predicting the parameters describing my functions :smile:. But this is just a toy model meant to help understand `Tensorflow`, so don't read too much into it.
 
 The plots are created using `matplotlib` and then converted into 2-D matrices (`numpy` arrays) of `image_size x image_size` pixels. We have gray scale images so one color channel, and each point in the matrix is a value between `0` and `1`.
 
